@@ -1,0 +1,13 @@
+family:
+- name: inspire
+  series:
+  - name: inspire_101x
+    socs:
+    - name: inspire_1010
+      cpuclusters:
+        - name: a7
+  - name: inspire_101x
+    socs:
+    - name: inspire_1011
+      cpuclusters:
+        - name: m7

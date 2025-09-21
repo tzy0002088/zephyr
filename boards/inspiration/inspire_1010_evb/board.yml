@@ -1,0 +1,5 @@
+board:
+  name: inspire_1010_evb
+  vendor: inspiration
+  socs:
+  - name: inspire_1010

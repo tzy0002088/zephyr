@@ -1,0 +1,10 @@
+config SOC_FAMILY_INSPIRE_101X
+	bool
+
+config SOC_SERIES
+    default "inspire_101x" if SOC_FAMILY_INSPIRE_101X
+
+config SOC_FAMILY
+	default "inspire_101x" if SOC_FAMILY_INSPIRE_101X
+
+rsource "*/Kconfig.soc"

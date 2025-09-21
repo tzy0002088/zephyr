@@ -1,0 +1,12 @@
+
+config SOC_SERIES_INSPIRE_101X
+    select SOC_FAMILY_INSPIRE
+    help
+        Enable support for inpire 101x soc series
+
+config SOC_INSPIRE_1010
+    bool
+    select SOC_SERIES_INSPIRE_101X
+
+config SOC
+    default "inspire_1010" if SOC_INSPIRE_1010
