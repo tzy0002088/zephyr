@@ -1,0 +1,6 @@
+if BOARD_INSPIRE_1010_EVB
+
+config BOARD
+    default "inspire_1010_evb"
+
+endif

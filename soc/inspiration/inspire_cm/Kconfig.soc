@@ -1,7 +1,0 @@
-config SOC_FAMILY_INSPIRE
-	bool
-
-config SOC_FAMILY
-	default "inspire" if SOC_FAMILY_INSPIRE
-
-rsource "*/Kconfig.soc"

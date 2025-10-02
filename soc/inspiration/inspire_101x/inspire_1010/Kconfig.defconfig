@@ -1,9 +1,0 @@
-if SOC_SERIES_INSPIRE_101X
-
-config NUM_IRQS
-    default 64
-
-config MMU
-    default y
-
-endif

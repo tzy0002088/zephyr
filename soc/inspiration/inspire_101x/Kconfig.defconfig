@@ -1,5 +1,12 @@
-if SOC_FAMILY_INSPIRE
+if SOC_SERIES_INSPIRE_101X
 
-rsource "*/Kconfig.defconfig"
+config NUM_IRQS
+    default 64
 
-endif 
+config MMU
+    default y
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default 600000000
+
+endif

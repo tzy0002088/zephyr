@@ -1,10 +1,13 @@
-config SOC_FAMILY_INSPIRE_101X
-	bool
+config SOC_INSPIRE_1010
+    bool
+    select SOC_SERIES_INSPIRE_101X
+
+config SOC_SERIES_INSPIRE_101X
+    bool
+    select SOC_FAMILY_INSPIRE_101X
 
 config SOC_SERIES
-    default "inspire_101x" if SOC_FAMILY_INSPIRE_101X
+    default "inspire_101x" if SOC_SERIES_INSPIRE_101X
 
-config SOC_FAMILY
-	default "inspire_101x" if SOC_FAMILY_INSPIRE_101X
-
-rsource "*/Kconfig.soc"
+config SOC
+    default "inspire_1010" if SOC_INSPIRE_1010

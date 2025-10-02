@@ -1,0 +1,6 @@
+
+if SOC_FAMILY_INSPIRE_101X
+
+rsource "*/Kconfig"
+
+endif

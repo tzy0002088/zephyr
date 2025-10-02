@@ -1,5 +1,2 @@
-if SOC_FAMILY_INSPIRE
-
 rsource "*/Kconfig.defconfig"
 
-endif 
