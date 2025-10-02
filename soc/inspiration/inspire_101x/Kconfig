@@ -3,4 +3,3 @@ config SOC_SERIES_INSPIRE_101X
     select ARM
     select BUILD_OUTPUT_HEX
     select SOC_EARLY_INIT_HOOK
-    select ARM_ARCH_TIMER if GIC

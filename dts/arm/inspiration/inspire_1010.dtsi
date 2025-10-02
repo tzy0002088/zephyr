@@ -1,1 +1,54 @@
 #include <arm/armv7-a.dtsi>
+#include <zephyr/dt-bindings/interrupt-controller/arm-gic.h>
+#include <mem.h>
+
+/ {
+    model = "Inspiration family SoC";
+    compatible = "inspire,1011";
+
+    cpus {
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        cpu0: cpu@0 {
+            device_type = "cpu";
+            compatible = "arm,cortex-a7";
+            clock-frequency = <900000000>;
+            reg = <0>;
+        };
+    };
+
+    /* 
+        TODO:
+            os tick driver
+            clock control driver
+            uart console driver
+    */
+
+    soc {
+        compatible = "simple-bus";
+        interrupt-parent = <&gic>;
+        #address-cells = <1>;
+        #size-cells = <1>;
+        ranges;
+
+        sram0: memory@80000000 {
+            compatible = "mmio-sram";
+            reg = <0x80000000 DT_SIZE_M(512)>;
+        };
+
+        gic: interrupt-controller@a00000 {
+            compatible = "arm,gic-v2", "arm,gic";
+            reg = <0xa00000 0x1000>, <0xa01000 0x100>; // Distributor + CPU Interface
+            interrupt-controller;
+            #interrupt-cells = <4>;
+        };
+
+		gpt1: gpt@2098000 {
+			compatible = "fsl,imx6ul-gpt", "fsl,imx6sx-gpt";
+			reg = <0x02098000 0x4000>;
+			interrupts = <GIC_SPI 55 IRQ_TYPE_EDGE IRQ_DEFAULT_PRIORITY>;
+		};
+    };
+
+};
