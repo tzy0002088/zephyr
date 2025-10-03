@@ -1,0 +1,15 @@
+# Copyright (c) 2022 Kumar Gala <galak@kernel.org>
+# SPDX-License-Identifier: Apache-2.0
+
+description: FSL General-Purpose HW Timer
+
+compatible: "fsl,gp-timer"
+
+include: base.yaml
+
+properties:
+  reg:
+    required: true
+
+  interrupts:
+    required: true

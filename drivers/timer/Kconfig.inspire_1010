@@ -1,0 +1,8 @@
+# Copyright (c) 2021 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config INSPIRE_1010_GP_TIMER
+	bool "Inspire GPT Event timer"
+	default y
+	depends on DT_HAS_FSL_GP_TIMER_ENABLED
+	select TICKLESS_CAPABLE

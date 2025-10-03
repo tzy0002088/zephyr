@@ -13,17 +13,10 @@
         cpu0: cpu@0 {
             device_type = "cpu";
             compatible = "arm,cortex-a7";
-            clock-frequency = <900000000>;
+            clock-frequency = <396000000>; // bootrom config 396
             reg = <0>;
         };
     };
-
-    /* 
-        TODO:
-            os tick driver
-            clock control driver
-            uart console driver
-    */
 
     soc {
         compatible = "simple-bus";
@@ -44,11 +37,11 @@
             #interrupt-cells = <4>;
         };
 
-		gpt1: gpt@2098000 {
-			compatible = "fsl,imx6ul-gpt", "fsl,imx6sx-gpt";
-			reg = <0x02098000 0x4000>;
-			interrupts = <GIC_SPI 55 IRQ_TYPE_EDGE IRQ_DEFAULT_PRIORITY>;
-		};
+        gpt1: gpt@2098000 {
+            compatible = "fsl,gp-timer";
+            reg = <0x02098000 0x4000>;
+            interrupts = <GIC_SPI 55 IRQ_TYPE_EDGE IRQ_DEFAULT_PRIORITY>;
+            status = "okay";
+        };
     };
-
 };

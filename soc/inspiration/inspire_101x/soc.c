@@ -24,9 +24,3 @@ void soc_early_init_hook(void)
 {
 
 }
-
-// 暂时先编译通过
-uint32_t sys_clock_elapsed(void)
-{
-	return 0U;
-}
