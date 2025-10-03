@@ -12,7 +12,4 @@ config SYS_CLOCK_HW_CYCLES_PER_SEC
 config OUTPUT_DISASSEMBLY
 	default y
 
-config XIP
-	default y
-
 endif

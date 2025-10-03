@@ -8,15 +8,14 @@
 #include <inspiration/inspire_1010.dtsi>
 
 #define SRAM_RO_SIZE    DT_SIZE_M(1)
-#define SRAM_RW_SIZE    (DT_SIZE_M(512) - SRAM_RO_SIZE)
+#define SRAM_RW_SIZE    (DT_SIZE_M(300) - SRAM_RO_SIZE)
 
 / {
 	model = "Inspiration 1010 evb";
 	compatible = "inspiration,inspire-1010-evb";
 
     chosen {
-		zephyr,flash = &sram0_ro;
-        zephyr,sram = &sram1_rw;
+        zephyr,sram = &sram0;
     };
 
 	soc {
@@ -24,17 +23,5 @@
         #address-cells = <1>;
         #size-cells = <1>;
         interrupt-parent = <&gic>;
-
-
-		/delete-node/ memory@80000000;
-		sram0_ro: memory@80000000 {
-			compatible = "mmio-sram";
-			reg = <0x80000000 SRAM_RO_SIZE>;
-		};
-
-		sram1_rw: memory@80100000 {
-			compatible = "mmio-sram";
-			reg = <0x80100000 SRAM_RW_SIZE>;
-		};
 	};
 };

@@ -96,6 +96,9 @@ extern FUNC_NORETURN void z_cstart(void);
  * This routine prepares for the execution of and runs C code.
  *
  */
+
+extern void debug_io();
+
 void z_prep_c(void)
 {
 #if defined(CONFIG_SOC_PREP_HOOK)
@@ -120,6 +123,7 @@ void z_prep_c(void)
 	z_arm_mpu_init();
 	z_arm_configure_static_mpu_regions();
 #elif defined(CONFIG_ARM_AARCH32_MMU)
+	debug_io();
 	z_arm_mmu_init();
 #endif
 	z_cstart();

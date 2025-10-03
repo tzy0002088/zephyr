@@ -4,3 +4,4 @@ config SOC_SERIES_INSPIRE_101X
     select BUILD_OUTPUT_HEX
     select SOC_EARLY_INIT_HOOK
     select TICKLESS_CAPABLE
+    select SOC_PREP_HOOK
