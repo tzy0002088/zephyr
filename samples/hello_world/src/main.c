@@ -6,9 +6,14 @@
 
 #include <stdio.h>
 
+void debug_io();
+
 int main(void)
 {
-	printf("Hello World! %s\n", CONFIG_BOARD_TARGET);
+	while (1)
+	{
+		debug_io();
+	}	
 
 	return 0;
 }

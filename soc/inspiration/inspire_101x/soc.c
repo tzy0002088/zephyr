@@ -10,8 +10,8 @@
 #include <zephyr/kernel.h>
 
 static const struct arm_mmu_region mmu_regions[] = {
-    MMU_REGION_FLAT_ENTRY("reg", 0, 0x80000000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_W),
-    MMU_REGION_FLAT_ENTRY("normal", 0x80000000, 0x20000000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_W),
+    MMU_REGION_FLAT_ENTRY("reg", 0, 0x80000000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_W | MT_DEVICE),
+    MMU_REGION_FLAT_ENTRY("normal", 0x80000000, 0x20000000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_W | MPERM_X),
 };
 
 const struct arm_mmu_config mmu_config = {
@@ -33,15 +33,9 @@ void relocate_vector_table(void)
 #define CCM_CCGR5 			*((volatile unsigned int *)0X020C407C)
 #define CCM_CCGR6 			*((volatile unsigned int *)0X020C4080)
 
-/* 
- * IOMUX相关寄存器地址 
- */
 #define SW_MUX_GPIO1_IO03 	*((volatile unsigned int *)0X020E0068)
 #define SW_PAD_GPIO1_IO03 	*((volatile unsigned int *)0X020E02F4)
 
-/* 
- * GPIO1相关寄存器地址 
- */
 #define GPIO1_DR 			*((volatile unsigned int *)0X0209C000)
 #define GPIO1_GDIR 			*((volatile unsigned int *)0X0209C004)
 #define GPIO1_PSR 			*((volatile unsigned int *)0X0209C008)
@@ -64,26 +58,10 @@ static void clk_enable(void)
 
 static void led_init(void)
 {
-    /* 1、初始化IO复用 */
-    SW_MUX_GPIO1_IO03 = 0x5;	/* 复用为GPIO1_IO03 */
-
-    /* 2、、配置GPIO1_IO03的IO属性	
-        *bit 16:0 HYS关闭
-        *bit [15:14]: 00 默认下拉
-        *bit [13]: 0 kepper功能
-        *bit [12]: 1 pull/keeper使能
-        *bit [11]: 0 关闭开路输出
-        *bit [7:6]: 10 速度100Mhz
-        *bit [5:3]: 110 R0/6驱动能力
-        *bit [0]: 0 低转换率
-    */
-    SW_PAD_GPIO1_IO03 = 0X10B0;		
-
-    /* 3、初始化GPIO */
-    GPIO1_GDIR = 0X0000008;	/* GPIO1_IO03设置为输出 */
-
-    /* 4、设置GPIO1_IO03输出低电平，打开LED0 */
-    GPIO1_DR = 0X0;
+    SW_MUX_GPIO1_IO03 = 0x5;
+    SW_PAD_GPIO1_IO03 = 0X10B0;
+    GPIO1_GDIR = 0X0000008;
+    GPIO1_DR |= (1<<3);
 }
 
 static void led_on(void)
@@ -112,24 +90,21 @@ static void delay(volatile unsigned int n)
 void debug_io()
 {
     led_on();
-    delay(1000);
+    delay(500);
     led_off();
+    delay(500);
 }
 
 void soc_prep_hook(void)
 {
     clk_enable();
     led_init();
-    led_on();
-    delay(1000);
-    led_off();
 }
 
 void soc_early_init_hook(void)
 {
-    clk_enable();
-    led_init();
     led_on();
-
-    while (1);
+    delay(1000);
+    led_off();
+    delay(1000);
 }

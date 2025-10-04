@@ -13,7 +13,7 @@
         cpu0: cpu@0 {
             device_type = "cpu";
             compatible = "arm,cortex-a7";
-            clock-frequency = <396000000>; // bootrom config 396
+            clock-frequency = <396000000>;
             reg = <0>;
         };
     };
