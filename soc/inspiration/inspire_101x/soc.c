@@ -11,8 +11,8 @@
 #include "uart.h"
 
 static const struct arm_mmu_region mmu_regions[] = {
-    MMU_REGION_FLAT_ENTRY("reg", 0, 0x80000000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_W | MT_DEVICE),
-    MMU_REGION_FLAT_ENTRY("normal", 0x80000000, 0x20000000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_W | MPERM_X),
+    MMU_REGION_FLAT_ENTRY("reg", 0, 0x10000000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_W),
+    MMU_REGION_FLAT_ENTRY("normal", CONFIG_KERNEL_VM_BASE, 0x1000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_X),
 };
 
 const struct arm_mmu_config mmu_config = {
@@ -91,9 +91,9 @@ static void delay(volatile unsigned int n)
 void debug_io()
 {
     led_on();
-    delay(3000);
+    delay(10000);
     led_off();
-    delay(3000);
+    delay(10000);
 }
 
 void soc_prep_hook(void)
