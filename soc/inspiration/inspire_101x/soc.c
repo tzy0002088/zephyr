@@ -8,6 +8,7 @@
 #include <zephyr/init.h>
 #include <zephyr/arch/arm/mmu/arm_mmu.h>
 #include <zephyr/kernel.h>
+#include "uart.h"
 
 static const struct arm_mmu_region mmu_regions[] = {
     MMU_REGION_FLAT_ENTRY("reg", 0, 0x80000000, MT_STRONGLY_ORDERED | MPERM_R | MPERM_W | MT_DEVICE),
@@ -90,9 +91,9 @@ static void delay(volatile unsigned int n)
 void debug_io()
 {
     led_on();
-    delay(500);
+    delay(3000);
     led_off();
-    delay(500);
+    delay(3000);
 }
 
 void soc_prep_hook(void)
@@ -103,8 +104,5 @@ void soc_prep_hook(void)
 
 void soc_early_init_hook(void)
 {
-    led_on();
-    delay(1000);
-    led_off();
-    delay(1000);
+
 }

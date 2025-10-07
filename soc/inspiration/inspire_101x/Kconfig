@@ -5,3 +5,6 @@ config SOC_SERIES_INSPIRE_101X
     select SOC_EARLY_INIT_HOOK
     select TICKLESS_CAPABLE
     select SOC_PREP_HOOK
+    select SERIAL
+    select CONSOLE
+    select UART_CONSOLE

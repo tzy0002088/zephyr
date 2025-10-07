@@ -11,17 +11,19 @@
 #define SRAM_RW_SIZE    (DT_SIZE_M(300) - SRAM_RO_SIZE)
 
 / {
-	model = "Inspiration 1010 evb";
-	compatible = "inspiration,inspire-1010-evb";
+    model = "Inspiration 1010 evb";
+    compatible = "inspiration,inspire-1010-evb";
 
     chosen {
         zephyr,sram = &sram0;
+        zephyr,console = &uart1;
+        zephyr,shell-uart = &uart1;
     };
 
-	soc {
-		compatible = "simpe-bus";
+    soc {
+        compatible = "simpe-bus";
         #address-cells = <1>;
         #size-cells = <1>;
         interrupt-parent = <&gic>;
-	};
+    };
 };

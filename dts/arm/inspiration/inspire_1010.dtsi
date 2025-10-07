@@ -40,7 +40,14 @@
         gpt1: gpt@2098000 {
             compatible = "fsl,gp-timer";
             reg = <0x02098000 0x4000>;
-            interrupts = <GIC_SPI 55 IRQ_TYPE_EDGE IRQ_DEFAULT_PRIORITY>;
+            interrupts = <GIC_SPI 55 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>;
+            status = "okay";
+        };
+
+        uart1: uart1@2020000 {
+            compatible = "inspire,isp-uart";
+            reg = <0x2020000 0x4000>;
+            current-speed = <115200>;
             status = "okay";
         };
     };

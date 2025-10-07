@@ -1,0 +1,5 @@
+config UART_INSPIRE_1010
+	bool "inspire 1010 UART driver"
+	default y
+	depends on DT_HAS_INSPIRE_ISP_UART_ENABLED
+	select SERIAL_HAS_DRIVER
